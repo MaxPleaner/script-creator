@@ -1,0 +1,42 @@
+<% unless @messages.blank? %>
+<pre class="messages">
+<%= raw @messages %>
+</pre>
+<% end %>
+
+<% unless @output.blank? %>
+  <header>
+    <h3>Output (<a href="clear_output">clear</a>)</h3>
+
+<pre>
+<%= @output %>
+</pre>
+  </header>
+<% end %>
+
+<header>
+<form id="create-script" action="create" method="POST">
+  <% if @script %>
+      <h4>Edit script <pre><%= @script.name %></pre> (<a href="execute?id=<%= @script.id %>">execute</a>)</h4>
+    <a href="/">new script</a> <br>
+    <input type="hidden" name="id" value="<%= @script.id %>">
+  <% else %>
+    <h4>New script</h4>
+  <% end %>
+  <input type="text" name="name" placeholder="name" value="<%= @script.try(:name) %>"> <br>
+  <textarea class="hidden" placeholder="content" name="content" id="" cols="30" rows="10">
+  </textarea> <br>
+  <pre contenteditable id="script-content">
+    <%= @script.try(:content) || "puts ('hello content')" %>
+  </pre> <br>
+  <input type="submit" value="<%= @script.try(:persisted?) ? "Update \'\'#{@script.name}\'\'" : "Create" %>">
+</form>
+</header>
+
+<% unless @scripts.blank? %>
+  <h4>scripts</h4>
+  <% @scripts.each do |script| %>
+    <a href="/script?id=<%= script.try(:id) %>"><%= script.name %></a> - <a href="delete?id=<%= script.id %>">delete</a> <br>
+  <% end %>
+<hr>
+<% end %>
