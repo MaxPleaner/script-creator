@@ -2,11 +2,20 @@
 <html>
 <head>
   <title>Scripts</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+<pre class="javascript-loader">Please wait, Javascript is still loading.</pre>
+
+<% @messages = [flash[:messages], @messages].flatten.compact %>
+<% unless @messages.blank? %>
+  <% [@messages].flatten.each do |msg| %>
+    <li class="message"><%= msg %></li>
+  <% end %>
+<% end %> <br>
 
 <%= yield %>
 

@@ -2,12 +2,44 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
+require 'uri'
+require 'ostruct'
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+class ActiveRecord::Base
+    def to_openstruct
+        puts "to_openstruct"
+        OpenStruct.new(self.attributes)
+    end
+end
+
+class ActiveRecord::Relation
+    def to_openstructs
+        puts "ar to_openstructs"
+        self.to_a.map(&:to_openstruct)
+    end
+end
+
+class Array
+    def to_openstructs
+        puts "arr to_openstructs"
+        self.map { |item| OpenStruct.new(item) }
+    end
+end
+
+class Hash
+    def to_openstruct
+        puts "hash"
+        OpenStruct.new(self)
+    end
+end
+
 module Scripts
   class Application < Rails::Application
+    config.autoload_paths << ""
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

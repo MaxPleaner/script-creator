@@ -1,0 +1,8 @@
+<% page ||= OpenStruct.new %>
+
+<form action="save_html_page" method="POST">
+  <input type="hidden" name="id" value="<%= page.id %>">
+  <input type="text" name="name" placeholder="name" value="<%= page.name %>"> <br>
+  <textarea name="content" cols="15" rows="15" placeholder="content"><%= page.content %></textarea> <br>
+  <input type="submit" value="submit">
+</form>

@@ -1,0 +1,55 @@
+<% unless @messages.blank? %>
+<pre class="messages">
+<%= raw @messages %>
+</pre>
+<% end %>
+
+<% unless @output.blank? %>
+  <header>
+    <h3>Output (<a href="clear_output">clear</a>)</h3>
+
+<pre id="output">
+<%= raw @output %>
+</pre>
+  </header>
+<% end %>
+
+<header>
+
+<button class="<%= "start-open" if @script %>" toggles=".script-form">
+  Toggle script form
+</button>
+<div class="script-form">  
+  <form id="create-script" action="create" method="POST">
+    <% if @script %>
+        <h4>Edit script <pre><%= @script.name %></pre> (<a href="execute?id=<%= @script.id %>">execute</a>)</h4>
+      <a href="/">new script</a> <br>
+      <input type="hidden" name="id" value="<%= @script.id %>">
+    <% else %>
+      <h4>New script</h4>
+    <% end %>
+    <input type="text" name="name" placeholder="name" value="<%= @script.try(:name) %>"> <br>
+    <textarea placeholder="content" name="content" id="" cols="20" rows="5">
+      <%= @script.try(:content) || "puts ('hello content')" %>
+    </textarea> <br>
+  <!--   <pre contenteditable id="script-content">
+    </pre> <br>
+   -->
+    <input type="submit" value="<%= @script.try(:persisted?) ? "Update \'\'#{@script.name}\'\'" : "Create" %>">
+  </form>
+</div>
+
+</header>
+
+<% unless @scripts.blank? %>
+  <button toggles=".scripts-index">toggle scripts</button><br>
+  <section class="scripts-index">
+    <% @scripts.each do |script| %>
+      <div class="script">
+        <a href="/script?id=<%= script.try(:id) %>"><%= script.name %></a> - <a href="delete?id=<%= script.id %>">delete</a> <br>
+      </div> <br>
+    <% end %>
+  </section>
+<% end %>
+<hr>
+<div class="end"><a href="http://github.com/maxpleaner/script-creator">This site on Github</a></div>

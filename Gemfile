@@ -17,7 +17,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+# gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -51,4 +51,34 @@ gem "awesome_print"
 
 gem "colored"
 
-gem "jquery-turbolinks"
+# gem "jquery-turbolinks"
+
+# find_job_listings
+  gem "indeed-ruby"
+  gem "nokogiri"
+  gem "mechanize"
+
+
+gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
+
+
+# ripl, dependencies, and plugins
+  gem "rb-readline" # dependency
+  gem "ripl" # use a REPL in a CLI
+  gem "ripl-multi_line"
+  gem "ripl-auto_indent"
+  gem "ripl-shell_commands"
+  gem "ripl-irb" # ignores some unneeded errors caused by IRB
+  gem "ripl-play" # playback / record ripl input
+  gem "ripl-color_streams" # colored output
+
+# Terminal coloring
+  gem "colored"
+  gem "awesome_print"
+
+# Show method sources
+  gem "method_source"
+
+# performance
+  gem "thin"
+  gem "rack-cache"

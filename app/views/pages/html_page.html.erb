@@ -1,0 +1,39 @@
+<b><a href="/">Back</a></b> <br> <br> <br>
+<b>All pages: </b> <% @pages.map(&:name).each do |name| %>
+  <a href="html_page?name=<%= name %>"><%= name %></a>, 
+<% end %>
+<br> <br>
+<hr>
+
+<h4><%= @page.name %></h4>
+
+<container>
+  <button toggles=".edit">Toggle Edit</button><br>
+  <section class="edit">
+    <%= render "save_html_page", page: @page %>
+  </section>
+</container>
+<br>
+
+<container>
+  <button toggles=".destroy">Destroy</button><br>
+  <section class="destroy">
+    <b>Are you sure? </b><br>
+    <b>
+      <form action="delete_html_page?id=<%= @page.id %>" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="confirm">
+      </form>
+    </b>
+  </section>
+</container>
+<br>
+
+<container>
+  <button class="start-open" toggles=".view-page">Toggle page content</button> <br> <br> <hr> <br>
+  <section class="view-page">
+    <%= raw @page.content.html_safe %>
+  </section>
+</container>
+<br>
+

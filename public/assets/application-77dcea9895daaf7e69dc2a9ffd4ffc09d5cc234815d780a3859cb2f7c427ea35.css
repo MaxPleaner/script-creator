@@ -10,9 +10,10 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
- *= require_self
+
+
  */
+
 
 .hidden {
   display: none;
@@ -75,8 +76,8 @@ input {
 
 textarea, .textarea {
   margin: 20px;
-  /*min-width: 600px;*/
-  /*min-height: 200px;*/
+  min-width: 600px;
+  min-height: 200px;
 }
 
 .script {
@@ -97,10 +98,4 @@ textarea, .textarea {
 .indented {
   border: 20px solid darkblue;
   padding: 50px;
-}
-
-.message { color: red; }
-
-.container {
-  /*border: 1px solid black;*/
 }
